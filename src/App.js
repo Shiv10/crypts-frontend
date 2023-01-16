@@ -2,11 +2,13 @@ import './App.css';
 import React from 'react'
 import Wave from 'react-wavify'
 import NavbarComponent from './components/Navbar';
+import Landing from './components/Landing';
 
 function App() {
   return (
     <div className="App">
       <NavbarComponent/>
+      <Landing />
       <Wave
         fill="url(#gradient)"
         className='wave1'

@@ -5,14 +5,24 @@ import Navbar from 'react-bootstrap/Navbar';
 function NavbarComponent() {
     return (
       <>
-        <Navbar bg="dark" variant="dark" sticky="top">
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
           <Container>
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-            <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#features">Features</Nav.Link>
-              <Nav.Link href="#pricing">Pricing</Nav.Link>
-            </Nav>
+            <Navbar.Brand href="#home"><span className='textColor'><strong>Balance : </strong>Wallet not Connected</span></Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="#features"></Nav.Link>
+                <Nav.Link href="#pricing"></Nav.Link>
+              </Nav>
+              <Nav>
+                <Nav.Link href="#deets"><span className='textColor'>Owned 🥚</span></Nav.Link>
+                <Nav.Link href="#memes">
+                  <span className='textColor'>
+                    Withdraw
+                  </span>
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
           </Container>
         </Navbar>
       </>
