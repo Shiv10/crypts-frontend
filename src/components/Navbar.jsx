@@ -5,9 +5,9 @@ import Navbar from 'react-bootstrap/Navbar';
 function NavbarComponent() {
     return (
       <>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky='top'>
           <Container>
-            <Navbar.Brand href="#home"><span className='textColor'><strong>Balance : </strong>Wallet not Connected</span></Navbar.Brand>
+            <Navbar.Brand><span className='textColor'><strong>Balance : </strong>Wallet not Connected</span></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
