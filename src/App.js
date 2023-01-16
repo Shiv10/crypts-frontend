@@ -1,8 +1,10 @@
 import './App.css';
 import React, { useState } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Wave from 'react-wavify'
 import NavbarComponent from './components/Navbar';
 import Landing from './components/Landing';
+import Signup from './components/Signup';
 
 
 export const WalletContext = React.createContext();
@@ -15,7 +17,12 @@ function App() {
     <div className="App">
       <WalletContext.Provider value={{address, setAddress}}>
         <NavbarComponent/>
-        <Landing />
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Landing/>} />
+            <Route path='/signup' element={<Signup/>} />
+          </Routes>
+        </BrowserRouter>
         <Wave
           fill="url(#gradient)"
           className='wave1'
