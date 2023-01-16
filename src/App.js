@@ -28,8 +28,8 @@ function App() {
           className='wave1'
           paused={false}
           options={{
-            height: 50,
-            amplitude: 35,
+            height: 200,
+            amplitude: 70,
             speed: 0.5,
             points: 5
           }}
@@ -42,22 +42,16 @@ function App() {
           </defs>
         </Wave>
         <Wave
-          fill="url(#gradient)"
+          fill="#0C3770"
           className='wave2'
           paused={false}
           options={{
-            height: 5,
+            height: 170,
             amplitude: 80,
-            speed: 0.2,
+            speed: 0.3,
             points: 2
           }}
         >
-          <defs>
-            <linearGradient id="gradient" gradientTransform="rotate(90)">
-              <stop offset="0%"  stopColor="#0C3770" />
-              <stop offset="100%" stopColor="#0C3770" />
-            </linearGradient>
-          </defs>
         </Wave>
       </WalletContext.Provider>
     </div>

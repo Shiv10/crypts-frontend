@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   height: 100%;
+  font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -12,13 +13,17 @@ body {
 .wrapper{
   width: 100%;
   height: 100%;
+  margin-top: -5%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
-.singup {
+.signup {
+  width: 100%;
+  height: 100%;
+  margin-top: -10%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,7 +31,7 @@ body {
 }
 
 .heading {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 3rem;
   font-weight: 800;
 }
@@ -38,17 +43,17 @@ body {
 }
 
 .subheading {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.3rem;
   color: #00609A;
   font-weight: 800;
 }
 
 .logo1 {
+  object-fit: cover;
   border-radius: 30px;
   background: #181818;
   box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);
-  /* background-color: #181818; */
   border-radius: 5%;
   display: flex;
   justify-content: center;
@@ -65,6 +70,14 @@ body {
   width: 100%;
 }
 
+.buttonSignupDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+}
+
 .textColor {
   color: #EBD7E7;
 }
@@ -73,11 +86,26 @@ body {
   background: #00B5C4 !important;
   border-radius: 5rem !important;
   width: 10%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+}
+
+.buttonSignup {
+  background: #00B5C4 !important;
+  border-radius: 5rem !important;
+  height: 3rem;
+  width: 15%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+}
+
+.buttonFont {
   font-family: 'Nunito Sans', sans-serif;
+  font-weight: 900;
 }
 
 .logo2 {
-  font-size: 7rem;
+  display: flex;
+  font-size: 5rem;
+  font-weight: 400;
   padding-top: 10%;
   padding-left: 10%;
   padding-right: 10%;
@@ -88,14 +116,20 @@ body {
 .wave1 {
   z-index: -1;
   position: fixed;
-  top: 80vh;
+  display: flex;
+  /* top: 80vh; */
+  bottom: 0;
+  height: 50vh;
   left: 0;
 }
 
 .wave2 {
   z-index: -2;
   position: fixed;
-  top: 80vh;
+  display: flex;
+  /* top: 80vh; */
+  bottom: 0;
+  height: 50vh;
   left: 0;
 }
 

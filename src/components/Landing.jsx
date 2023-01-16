@@ -23,10 +23,10 @@ function Landing() {
   return (
     <div className='wrapper'>
         <div className='logo1'>
-          <h1 className='logo2'>CRYPT</h1>
+          <div className='logo2'>CRYPT</div>
         </div>
         <div className='buttonConnectDiv'>
-          <Button variant="primary" className='buttonConnect' onClick={connectWallet}>Connect Wallet</Button>
+          <Button variant="primary" className='buttonConnect' onClick={connectWallet}><span className='buttonFont'>Connect Wallet</span></Button>
         </div>
         <ToastContainer theme='dark'/>
     </div>

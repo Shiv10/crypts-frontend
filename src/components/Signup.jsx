@@ -21,12 +21,20 @@ function Signup() {
   }
 
   return (
-    <div className='singup'>
+    <div className='signup'>
       <div className='welcome heading'>
         Welcome To CRYPT
       </div>
       <div className='welcome subheading'>
         Powered By CRP
+      </div>
+      {/* <br/> */}
+      <br/>
+      <div className='buttonSignupDiv'>
+        <Button variant="primary" className='buttonSignup' onClick={connectWallet}><span className='buttonFont'>Start</span></Button>
+      </div>
+      <div className='buttonSignupDiv'>
+        <Button variant="primary" className='buttonSignup' onClick={connectWallet}><span className='buttonFont'>Get Polygon Gas</span></Button>
       </div>
     </div>
   )
