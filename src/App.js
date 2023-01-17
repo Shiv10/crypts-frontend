@@ -12,6 +12,7 @@ export const WalletContext = React.createContext();
 function App() {
 
   const [ address, setAddress ] = useState(null);
+  const [balance, setBalance] = useState('Wallet not connected')
 
   useEffect(() => {
     const savedAddress = localStorage.getItem('address');
@@ -22,7 +23,7 @@ function App() {
 
   return (
     <div className="App">
-      <WalletContext.Provider value={{address, setAddress}}>
+      <WalletContext.Provider value={{address, setAddress, balance, setBalance}}>
         <NavbarComponent/>
         <BrowserRouter>
           <Routes>
