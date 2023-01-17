@@ -1,24 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 import { WalletContext } from '../App';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function Signup() {
   const wallet = useContext(WalletContext);
+  const navigate = useNavigate ();
 
-  async function connectWallet() {
-    if (window.ethereum) {
-      try {
-        const result = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        wallet.setAddress(result[0]);
-      } catch (e) {
-        toast.error('Internal Issue');
-      }
-    } else {
-      toast('Please install metamask!');
-    }
+  async function openPolygonFaucet() {
+    window.open('https://faucet.polygon.technology/', '_blank', 'noreferrer');
   }
+
+  useEffect(() => {
+    if (!wallet.address) {
+      navigate('/');
+    }
+  }, [navigate, wallet])
 
   return (
     <div className='signup'>
@@ -31,10 +28,10 @@ function Signup() {
       {/* <br/> */}
       <br/>
       <div className='buttonSignupDiv'>
-        <Button variant="primary" className='buttonSignup' onClick={connectWallet}><span className='buttonFont'>Start</span></Button>
+        <Button variant="primary" className='buttonSignup' onClick={openPolygonFaucet}><span className='buttonFont'>Start</span></Button>
       </div>
       <div className='buttonSignupDiv'>
-        <Button variant="primary" className='buttonSignup' onClick={connectWallet}><span className='buttonFont'>Get Polygon Gas</span></Button>
+        <Button variant="primary" className='buttonSignup' onClick={openPolygonFaucet}><span className='buttonFont'>Get Polygon Gas</span></Button>
       </div>
     </div>
   )

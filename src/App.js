@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Wave from 'react-wavify'
 import NavbarComponent from './components/Navbar';
@@ -12,6 +12,13 @@ export const WalletContext = React.createContext();
 function App() {
 
   const [ address, setAddress ] = useState(null);
+
+  useEffect(() => {
+    const savedAddress = localStorage.getItem('address');
+    if (savedAddress) {
+      setAddress(savedAddress);
+    }
+  }, [setAddress]);
 
   return (
     <div className="App">
@@ -29,9 +36,9 @@ function App() {
           paused={false}
           options={{
             height: 200,
-            amplitude: 70,
-            speed: 0.5,
-            points: 5
+            amplitude: 40,
+            speed: 0.4,
+            points: 4
           }}
         >
           <defs>

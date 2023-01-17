@@ -1,17 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
 import { WalletContext } from '../App';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 function Landing() {
   const wallet = useContext(WalletContext);
+  const navigate = useNavigate();
 
   async function connectWallet() {
     if (window.ethereum) {
       try {
         const result = await window.ethereum.request({ method: 'eth_requestAccounts' });
         wallet.setAddress(result[0]);
+        localStorage.setItem('address', result[0]);
+        navigate('/signup');
       } catch (e) {
         toast.error('Internal Issue');
       }
@@ -19,6 +23,12 @@ function Landing() {
       toast('Please install metamask!');
     }
   }
+
+  useEffect( () => {
+    if (wallet.address) {
+      navigate('/signup');
+    }
+  }, [wallet, navigate]);
 
   return (
     <div className='wrapper'>
