@@ -5,6 +5,7 @@ import Wave from 'react-wavify'
 import NavbarComponent from './components/Navbar';
 import Landing from './components/Landing';
 import Signup from './components/Signup';
+import Pruchase from './components/Pruchase';
 
 
 export const WalletContext = React.createContext();
@@ -29,6 +30,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Landing/>} />
             <Route path='/signup' element={<Signup/>} />
+            <Route path='/purchase' element={<Pruchase/>}/>
           </Routes>
         </BrowserRouter>
         <Wave
