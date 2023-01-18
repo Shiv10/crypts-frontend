@@ -19,7 +19,7 @@ function NavbarComponent() {
       const signer = provider.getSigner();
       const contract = new ethers.Contract(GAME_ADDRESS, Game_abi, signer);
       const playerBalance = await contract.bank(wallet.address);
-      wallet.setBalance(`${parseInt(playerBalance.toString())/(Math.pow(10, 18))} CRP`);
+      wallet.setBalance(`${parseInt(playerBalance.toString())/(Math.pow(10, 18))}`);
     }
     if (wallet.address) {
       getBalance();
@@ -32,7 +32,7 @@ function NavbarComponent() {
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky='top'>
         <Container>
-          <Navbar.Brand><span className='textColor'><strong>Balance : </strong>{wallet.balance}</span></Navbar.Brand>
+          <Navbar.Brand><span className='textColor'><strong>Balance : </strong>{wallet.balance} CRP</span></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">

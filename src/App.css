@@ -35,6 +35,16 @@ body {
   flex-direction: column;
 }
 
+.purchase {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  margin-top: -8%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .heading {
   font-family: 'Montserrat', sans-serif;
   font-size: 3rem;
@@ -53,6 +63,12 @@ body {
   color: #00609A;
   font-weight: 800;
 }
+
+.price {
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+
 
 .logo1 {
   object-fit: cover;
@@ -138,7 +154,7 @@ body {
 }
 
 .eggs {
-  width: 17%;
+  width: 15%;
   height: auto;
 }
 

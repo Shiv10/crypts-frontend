@@ -22,7 +22,7 @@ function Signup() {
 
   async function userSignup() {
     await contract.signup();
-    wallet.setBalance('1000 CRP');
+    wallet.setBalance('1000');
   }
 
   useEffect(() => {
