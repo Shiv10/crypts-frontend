@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { WalletContext } from '../App';
 import Game_abi from '../ABI/Game_abi.json';
 import { ethers } from 'ethers';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const GAME_ADDRESS = '0x82eA9bF7690EaE34e75BA77A5Cd2330f12365f0A'
 let provider;
@@ -36,7 +38,7 @@ function Signup() {
           navigate('/purchase');
         }
       } catch (e) {
-        console.log(e);
+        toast.error('Please login to Metamask');
       }
     }
     if (localStorage.getItem('playing')) {
@@ -64,6 +66,7 @@ function Signup() {
       <div className='buttonSignupDiv'>
         <Button variant="primary" className='buttonSignup' onClick={openPolygonFaucet}><span className='buttonFont'>Get Polygon Gas</span></Button>
       </div>
+      <ToastContainer theme='dark'/>
     </div>
   )
 }

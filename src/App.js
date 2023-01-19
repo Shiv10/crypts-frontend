@@ -14,7 +14,7 @@ export const WalletContext = React.createContext();
 function App() {
 
   const [ address, setAddress ] = useState(null);
-  const [balance, setBalance] = useState('Wallet not connected')
+  const [balance, setBalance] = useState('')
 
   useEffect(() => {
     const savedAddress = localStorage.getItem('address');
