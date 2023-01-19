@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { WalletContext } from '../App';
 import Game_abi from '../ABI/Game_abi.json';
@@ -37,7 +36,7 @@ function Signup() {
           navigate('/purchase');
         }
       } catch (e) {
-        toast.error('Some error occurred');
+        console.log(e);
       }
     }
     if (localStorage.getItem('playing')) {
@@ -65,7 +64,6 @@ function Signup() {
       <div className='buttonSignupDiv'>
         <Button variant="primary" className='buttonSignup' onClick={openPolygonFaucet}><span className='buttonFont'>Get Polygon Gas</span></Button>
       </div>
-      <ToastContainer theme='dark'/>
     </div>
   )
 }

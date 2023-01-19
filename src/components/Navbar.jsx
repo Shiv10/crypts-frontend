@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -40,7 +40,7 @@ function NavbarComponent() {
               <Nav.Link href="#pricing"></Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link href="#deets"><span className='textColor'>Owned 🥚</span></Nav.Link>
+              <Nav.Link href="/owned"><span className='textColor'>Owned 🥚</span></Nav.Link>
               <Nav.Link href="#memes">
                 <span className='textColor'>
                   Withdraw
