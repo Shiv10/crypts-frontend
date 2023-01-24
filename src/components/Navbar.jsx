@@ -24,7 +24,7 @@ function NavbarComponent() {
     if (wallet.address) {
       getBalance();
     } else {
-      wallet.setBalance('Wallet not connected');
+      wallet.setBalance('');
     }
   })
 
@@ -32,7 +32,16 @@ function NavbarComponent() {
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky='top'>
         <Container>
-          <Navbar.Brand><span className='textColor'><strong>Balance : </strong>{wallet.balance} CRP</span></Navbar.Brand>
+          {/* <Navbar.Brand><span className='textColor'><strong>Balance : </strong>{wallet.balance} CRP</span></Navbar.Brand> */}
+          <Navbar.Brand><span className='textColor'><strong>Balance : { wallet.balance.length>0? (
+            <>
+              {wallet.balance} CRP
+            </>
+          ): (
+            <>
+              Wallet not connected
+            </>
+          )}</strong></span></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
