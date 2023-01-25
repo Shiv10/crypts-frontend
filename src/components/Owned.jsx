@@ -1,73 +1,119 @@
-import React, { useState, useRef, useEffect} from 'react'
-import PurchaseEgg from '../assets/purchase.png'
-import { FaQuoteRight } from 'react-icons/fa';
+import React, { useState, useContext, useEffect} from 'react'
+import Button from 'react-bootstrap/Button';
+import Owned1 from '../assets/owned/owned_1.png';
+import Owned2 from '../assets/owned/owned_2.png'
+import Owned3 from '../assets/owned/owned_3.png'
+import Owned4 from '../assets/owned/owned_4.png'
+import Owned5 from '../assets/owned/owned_5.png'
+
+import { FaArtstation } from 'react-icons/fa';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ethers } from 'ethers';
+import Game_abi from '../ABI/Game_abi.json';
+import { WalletContext } from '../App';
 
-// const data = [
-//   {
-//     id: 1,
-//     image:
-//       'https://res.cloudinary.com/diqqf3eq2/image/upload/v1595959131/person-2_ipcjws.jpg',
-//     name: 'maria ferguson',
-//     title: 'office manager',
-//     quote:
-//       'Fingerstache umami squid, kinfolk subway tile selvage tumblr man braid viral kombucha gentrify fanny pack raclette pok pok mustache.',
-//   },
-//   {
-//     id: 2,
-//     image:
-//       'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883417/person-3_ipa0mj.jpg',
-//     name: 'john doe',
-//     title: 'regular guy',
-//     quote:
-//       'Gastropub sustainable tousled prism occupy. Viral XOXO roof party brunch actually, chambray listicle microdosing put a bird on it paleo subway tile squid umami.',
-//   },
-//   {
-//     id: 3,
-//     image:
-//       'https://res.cloudinary.com/diqqf3eq2/image/upload/v1595959121/person-1_aufeoq.jpg',
-//     name: 'peter smith',
-//     title: 'product designer',
-//     quote:
-//       'Drinking vinegar polaroid street art echo park, actually semiotics next level butcher master cleanse hammock flexitarian ethical paleo.',
-//   },
-//   {
-//     id: 4,
-//     image:
-//       'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883334/person-1_rfzshl.jpg',
-//     name: 'susan andersen',
-//     title: 'the boss',
-//     quote:
-//       'Marfa af yr 3 wolf moon kogi, readymade distillery asymmetrical seitan kale chips fingerstache cloud bread mustache twee messenger bag. ',
-//   },
-// ];
 
-const data = [
-  {
-    id: 1,
-    image:
-      'https://res.cloudinary.com/diqqf3eq2/image/upload/v1595959131/person-2_ipcjws.jpg',
-    name: 'maria ferguson',
-    title: 'office manager',
-    quote:
-      'Fingerstache umami squid, kinfolk subway tile selvage tumblr man braid viral kombucha gentrify fanny pack raclette pok pok mustache.',
-  },
-  // {
-  //   id: 2,
-  //   image:
-  //     'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883334/person-1_rfzshl.jpg',
-  //   name: 'susan andersen',
-  //   title: 'the boss',
-  //   quote:
-  //     'Marfa af yr 3 wolf moon kogi, readymade distillery asymmetrical seitan kale chips fingerstache cloud bread mustache twee messenger bag. ',
-  // }
-];
+const GAME_ADDRESS = '0x82eA9bF7690EaE34e75BA77A5Cd2330f12365f0A'
+let provider;
+let signer;
+let contract;
 
+const pictures = {
+  'Earth': Owned1,
+  'Fire': Owned2,
+  'Air': Owned3,
+  'Water': Owned4,
+  'Not Set': Owned5
+}
 
 function Owned() {
 
-  const [people, setPeople] = useState(data);
+  const [people, setPeople] = useState([]);
   const [index, setIndex] = useState(0);
+  const wallet = useContext(WalletContext);
+
+  async function getOwnedEggs() {
+    try {
+      provider = new ethers.providers.Web3Provider(window.ethereum);
+      signer = provider.getSigner();
+      contract = new ethers.Contract(GAME_ADDRESS, Game_abi, signer);
+      const savedAddress = localStorage.getItem('address');
+      const ownedEggs = await contract.getOwnedEggs(savedAddress);
+      const eggs = ownedEggs.map(egg => {
+        return egg.toNumber();
+      });
+      
+      const promises = [];
+      for (const egg of eggs) {
+        promises.push(contract.eggs(egg));
+      }
+
+      Promise.all(promises).then( (results) => {
+        const data = [];
+        results.forEach((result, index) => {
+          const str = result.toString();
+          let element = str.substring(2,4);
+          let persona = str.substring(4,6);
+          let trait = str.substring(6,8);
+          if (element === '00') {
+            element = 'Not Set';
+          } else if ( element === '31' ) {
+            element = 'Fire';
+          } else if ( element === '32' ) {
+            element = 'Water';
+          } else if ( element === '33' ) {
+            element = 'Earth';
+          } else if ( element === '34' ) {
+            element = 'Air'
+          }
+
+
+          if (persona === '00') {
+            persona = 'Not Set';
+          } else if ( persona === '31' ) {
+            persona = 'Honesty';
+          } else if ( persona === '32' ) {
+            persona = 'Cunning';
+          } else if ( persona === '33' ) {
+            persona = 'Hardworking';
+          } else if ( persona === '34' ) {
+            persona = 'Inspiring'
+          }
+
+          if (trait === '00') {
+            trait = 'Not Set';
+          } else if ( trait === '31' ) {
+            trait = 'Bravery';
+          } else if ( trait === '32' ) {
+            trait = 'Ambition';
+          } else if ( trait === '33' ) {
+            trait = 'Empathy';
+          }
+
+          const eggData = {
+            id: eggs[index],
+            element,
+            persona,
+            trait
+          };
+
+          data.push(eggData);
+        });
+        setPeople(data)
+      });
+
+    } catch (e) {
+      console.log(e);
+      toast.error('Internal error')
+    }
+  }
+
+  useEffect(() => {
+    getOwnedEggs();
+  }, []);
+
 
   useEffect(() => {
     const lastIndex = people.length - 1;
@@ -79,58 +125,54 @@ function Owned() {
     }
   }, [index, people]);
 
-  useEffect(() => {
-    let slider = setInterval(() => {
-      setIndex(index + 1);
-    }, 5000);
-    return () => {
-      clearInterval(slider);
-    };
-  }, [index]);
-
 
   return (
     <div className='purchase'>
       <section className='section'>
         <div className="title">
           <h2>
-            <span>/</span>reviews
+            Owned Eggs
           </h2>
         </div>
-        <div className="section-center">
-          {people.map((person, personIndex) => {
-            console.log({personIndex, index});
-            const { id, image, name, title, quote } = person;
-            // more stuff
-            let position = 'nextSlide';
-            
+        {
+          people.length > 0?
 
-            if (personIndex === (index-1) || (index === 0 && personIndex === people.length - 1) ) {
-              position = 'lastSlide';
-            }
+          <div className="section-center">
+            {people.map((person, personIndex) => {
+              const { id, element, persona, trait } = person;
+              // more stuff
+              let position = 'nextSlide';
+              
 
-            if (personIndex === index) {
-              position = 'activeSlide';
-            }
-            return <article className={position} key={id}>
-              <div className='person-img'>
-                <img src={PurchaseEgg} alt='egg' className='eggScroll' />
-              </div>
-              <h4>{name}</h4>
-              <p className='title'>{title}</p>
-              <p className="text">{quote}</p>
-              <FaQuoteRight className='icon' />
-            </article>
-          })}
+              if (personIndex === (index-1) || (index === 0 && personIndex === people.length - 1) ) {
+                position = 'lastSlide';
+              }
 
-        <button className="prev" onClick={() => setIndex(index - 1)}>
-          <FiChevronLeft />
-        </button>
-        <button className="next" onClick={() => setIndex(index + 1)}>
-          <FiChevronRight />
-        </button>
-        </div>
+              if (personIndex === index) {
+                position = 'activeSlide';
+              }
+              return <article className={position} key={id}>
+                <div className='person-img'>
+                  <img src={ pictures[element] } alt='egg' className='eggScroll' />
+                </div>
+                <h4>Element: {element}</h4>
+                <h4>Personality: {persona}</h4>
+                <h4>Trait: {trait}</h4>
+              </article>
+            })}
+
+          <button className="prev" onClick={() => setIndex(index - 1)}>
+            <FiChevronLeft />
+          </button>
+          <button className="next" onClick={() => setIndex(index + 1)}>
+            <FiChevronRight />
+          </button>
+         </div>:<>
+            No Owned Eggs
+         </>
+        }
       </section>
+      <ToastContainer theme='dark'/>
     </div>
   )
 }

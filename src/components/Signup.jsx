@@ -39,7 +39,6 @@ function Signup() {
         }
       } catch (e) {
         toast.error('Please login to Metamask');
-        navigate('/')
       }
     }
     if (localStorage.getItem('playing')) {
