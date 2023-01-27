@@ -1,18 +1,19 @@
-import React, { useState, useContext, useEffect} from 'react'
+import React, { useState, useEffect} from 'react'
 import Button from 'react-bootstrap/Button';
 import Owned1 from '../assets/owned/owned_1.png';
 import Owned2 from '../assets/owned/owned_2.png'
 import Owned3 from '../assets/owned/owned_3.png'
 import Owned4 from '../assets/owned/owned_4.png'
 import Owned5 from '../assets/owned/owned_5.png'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
-import { FaArtstation } from 'react-icons/fa';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ethers } from 'ethers';
 import Game_abi from '../ABI/Game_abi.json';
-import { WalletContext } from '../App';
 
 
 const GAME_ADDRESS = '0x82eA9bF7690EaE34e75BA77A5Cd2330f12365f0A'
@@ -32,7 +33,6 @@ function Owned() {
 
   const [people, setPeople] = useState([]);
   const [index, setIndex] = useState(0);
-  const wallet = useContext(WalletContext);
 
   async function getOwnedEggs() {
     try {
@@ -151,14 +151,24 @@ function Owned() {
               if (personIndex === index) {
                 position = 'activeSlide';
               }
-              return <article className={position} key={id}>
-                <div className='person-img'>
-                  <img src={ pictures[element] } alt='egg' className='eggScroll' />
-                </div>
-                <h4>Element: {element}</h4>
-                <h4>Personality: {persona}</h4>
-                <h4>Trait: {trait}</h4>
-              </article>
+              return (
+                <article className={position} key={id}>
+                  <div className='person-img'>
+                    <img src={ pictures[element] } alt='egg' className='eggScroll' />
+                  </div>
+                  <h4>Element: {element}</h4>
+                  <h4>Personality: {persona}</h4>
+                  <h4>Trait: {trait}</h4>
+                  
+                  <Container style={{ padding: '5%'}}>
+                    <Row>
+                      <Col><a href='/setElement'><Button variant="primary" className='ownedButton'><span className='buttonFont'>Set Element</span></Button></a></Col>
+                      <Col><a href='/setPersona'><Button variant="primary" className='ownedButton'><span className='buttonFont'>Set Persona</span></Button></a></Col>
+                      <Col><a href='/setTrait'><Button variant="primary" className='ownedButton'><span className='buttonFont'>Set Trait</span></Button></a></Col>
+                    </Row>
+                  </Container>
+                </article>
+              )
             })}
 
           <button className="prev" onClick={() => setIndex(index - 1)}>
@@ -167,7 +177,8 @@ function Owned() {
           <button className="next" onClick={() => setIndex(index + 1)}>
             <FiChevronRight />
           </button>
-         </div>:<>
+         </div>:
+         <>
             No Owned Eggs
          </>
         }
