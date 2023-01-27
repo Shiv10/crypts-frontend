@@ -207,6 +207,12 @@ body {
   }
 }
 
+/*
+===============
+Auras
+===============
+*/
+
 
 /*
 =============== 
@@ -248,11 +254,8 @@ Slider
   width: 150px;
   height: 150px;
   object-fit: cover;
-  border: 4px solid var(--clr-grey-8);
-  box-shadow: var(--dark-shadow);
 }
 article h4 {
-  text-transform: uppercase;
   color: var(--clr-primary-5);
   margin-bottom: 0.25rem;
 }
@@ -268,11 +271,30 @@ article h4 {
   line-height: 2;
   color: var(--clr-grey-5);
 }
+
+.text-quote {
+  max-width: 35em;
+  margin: 0 auto;
+  margin-top: 0.2rem;
+  line-height: 2;
+  color: var(--clr-grey-5);
+}
 .icon {
-  font-size: 3rem;
+  float: right;
+  font-size: 1rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
   color: var(--clr-primary-5);
 }
+
+.icon-left {
+  float: left;
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: var(--clr-primary-5);
+}
+
 .prev,
 .next {
   position: absolute;
@@ -313,13 +335,14 @@ article h4 {
 }
 article {
   position: absolute;
-  top: 0;
+  /* top: 0; */
   left: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
   transition: var(--transition);
 }
+
 article.activeSlide {
   opacity: 1;
   transform: translateX(0);

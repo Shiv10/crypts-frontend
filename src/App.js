@@ -7,6 +7,7 @@ import Landing from './components/Landing';
 import Signup from './components/Signup';
 import Pruchase from './components/Pruchase';
 import Owned from './components/Owned';
+import Element from './components/Element';
 
 
 export const WalletContext = React.createContext();
@@ -33,6 +34,7 @@ function App() {
             <Route path='/signup' element={<Signup/>} />
             <Route path='/purchase' element={<Pruchase/>}/>
             <Route path='/owned' element={<Owned/>}/>
+            <Route path='/setElement' element={<Element/>} />
           </Routes>
         </BrowserRouter>
         <Wave

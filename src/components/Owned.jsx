@@ -162,9 +162,9 @@ function Owned() {
                   
                   <Container style={{ padding: '5%'}}>
                     <Row>
-                      <Col><a href='/setElement'><Button variant="primary" className='ownedButton'><span className='buttonFont'>Set Element</span></Button></a></Col>
-                      <Col><a href='/setPersona'><Button variant="primary" className='ownedButton'><span className='buttonFont'>Set Persona</span></Button></a></Col>
-                      <Col><a href='/setTrait'><Button variant="primary" className='ownedButton'><span className='buttonFont'>Set Trait</span></Button></a></Col>
+                      <Col><a href={'/setElement?egg='+id}><Button variant="primary" className='ownedButton'><span className='buttonFont'>Set Element</span></Button></a></Col>
+                      <Col><a href={'/setPersona?egg='+id}><Button variant="primary" className='ownedButton'><span className='buttonFont'>Set Persona</span></Button></a></Col>
+                      <Col><a href={'/setTrait?egg='+id}><Button variant="primary" className='ownedButton'><span className='buttonFont'>Set Trait</span></Button></a></Col>
                     </Row>
                   </Container>
                 </article>
